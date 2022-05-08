@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Sets the root view controller to our MainTabBarController
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = MainTabBarController()
+        window?.rootViewController = UINavigationController(rootViewController: LoginController())
         window?.makeKeyAndVisible()
     }
 
