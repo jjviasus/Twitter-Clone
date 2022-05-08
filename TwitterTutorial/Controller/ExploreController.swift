@@ -15,10 +15,14 @@ class ExploreController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .blue
+        configureUI()
     }
     
     // MARK: - Helpers
+    
+    func configureUI() {
+        self.view.backgroundColor = .white
+        self.navigationItem.title = "Explore"
+    }
 }
 
