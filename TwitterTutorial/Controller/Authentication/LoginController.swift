@@ -73,7 +73,24 @@ class LoginController: UIViewController {
     }
     
     @objc func handleLogin() {
-        print("Handle login here..")
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        AuthService.shared.logUserIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("DEBUG: Error logging in \(error.localizedDescription)")
+                return
+            }
+            
+            // Get access to the tab bar controller
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            guard let tabController = window.rootViewController as? MainTabBarController else { return }
+            
+            tabController.authenticateUserAndConfigureUI()
+            
+            // Dismiss the login controller
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: - Helpers

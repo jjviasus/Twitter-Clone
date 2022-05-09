@@ -13,6 +13,7 @@
 		D025A83C2828AB12004C0DB3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D025A83B2828AB12004C0DB3 /* FirebaseDatabase */; };
 		D025A83E2828AB12004C0DB3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D025A83D2828AB12004C0DB3 /* FirebaseStorage */; };
 		D038FB6D2828B76A00BE5C76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D038FB6C2828B76A00BE5C76 /* Constants.swift */; };
+		D038FB6F28297C6500BE5C76 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D038FB6E28297C6500BE5C76 /* AuthService.swift */; };
 		D0FD0D162825BAD6000FE708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD0D152825BAD6000FE708 /* AppDelegate.swift */; };
 		D0FD0D182825BAD6000FE708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD0D172825BAD6000FE708 /* SceneDelegate.swift */; };
 		D0FD0D1D2825BAD6000FE708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FD0D1B2825BAD6000FE708 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		D025A83428288D03004C0DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D038FB6C2828B76A00BE5C76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D038FB6E28297C6500BE5C76 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		D0FD0D122825BAD6000FE708 /* TwitterTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FD0D152825BAD6000FE708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0FD0D172825BAD6000FE708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		D0FD0D2B2825BB1D000FE708 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D038FB6E28297C6500BE5C76 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				D0FD0D162825BAD6000FE708 /* AppDelegate.swift in Sources */,
 				D0FD0D3B282739C0000FE708 /* Extensions.swift in Sources */,
 				D0FD0D3E2827497E000FE708 /* LoginController.swift in Sources */,
+				D038FB6F28297C6500BE5C76 /* AuthService.swift in Sources */,
 				D0FD0D352825BE21000FE708 /* ExploreController.swift in Sources */,
 				D0FD0D182825BAD6000FE708 /* SceneDelegate.swift in Sources */,
 				D0FD0D312825BBFC000FE708 /* MainTabBarController.swift in Sources */,

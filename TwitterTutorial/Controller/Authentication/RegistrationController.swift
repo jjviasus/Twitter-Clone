@@ -105,38 +105,17 @@ class RegistrationController: UIViewController {
         guard let fullname = fullnameTextField.text else { return }
         guard let username = usernameTextField.text else { return }
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        // A unique identifier for the profile image file
-        let filename = NSUUID().uuidString
-        let storageReference = STORAGE_PROFILE_IMAGES.child(filename)
-        
-        // Puts the file in the firebase storage
-        storageReference.putData(imageData, metadata: nil) { meta, error in
-            storageReference.downloadURL { url, error in
-                guard let profileImageUrl = url?.absoluteString else { return }
-                
-                // Create the user in the firebase authentication
-                Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                    if let error = error {
-                        print("DEBUG: Error is \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    // A unique identifier for the user
-                    guard let uid = result?.user.uid else { return }
-                    
-                    let values = ["email": email,
-                                  "username": username,
-                                  "fullname": fullname,
-                                  "profileImageUrl": profileImageUrl]
-                    
-                    // Update the valuesi in the firebase database
-                    let userReference = REF_USERS.child(uid)
-                    userReference.updateChildValues(values) { error, ref in
-                        print("DEBUG: Successfully updated user information..")
-                    }
-                }
-            }
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
+        AuthService.shared.registerUser(credentials: credentials) { error, databaseRef in
+            
+            // Get access to the tab bar controller
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            guard let tabController = window.rootViewController as? MainTabBarController else { return }
+            
+            tabController.authenticateUserAndConfigureUI()
+            
+            // Dismiss the registration controller
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

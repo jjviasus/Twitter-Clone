@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabBarController: UITabBarController {
     
@@ -26,9 +27,38 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewControllers()
-        uiTabBarSetting()
-        configureUI()
+        //logUserOut()
+        view.backgroundColor = .twitterBlue
+        authenticateUserAndConfigureUI()
+    }
+    
+    // MARK: - API
+    
+    // Checks if the user is logged in
+    func authenticateUserAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
+            // User is NOT signed in. Present them the login controller.
+            
+            // When you want to present a controller over the root view controller on load, it has to be done on the main thread.
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+            // User is signed in. We configure the view controller and ui.
+            configureViewControllers()
+            uiTabBarSetting()
+            configureUI()
+        }
+    }
+    
+    func logUserOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
     }
     
     // MARK: - Selectors
