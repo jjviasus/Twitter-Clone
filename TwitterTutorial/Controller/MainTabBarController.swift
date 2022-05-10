@@ -83,7 +83,11 @@ class MainTabBarController: UITabBarController {
     // MARK: - Selectors
     
     @objc func actionButtonTapped() {
-        print(123)
+        guard let user = user else { return }
+        let controller = UploadTweetController(user: user)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
     
     // MARK: - Helpers
@@ -120,9 +124,8 @@ class MainTabBarController: UITabBarController {
         nav.navigationBar.barTintColor = .white
         
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
-        nav.navigationBar.standardAppearance = appearance
+        //nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.scrollEdgeAppearance = appearance
         
         return nav
@@ -131,10 +134,9 @@ class MainTabBarController: UITabBarController {
     func uiTabBarSetting() {
         if #available(iOS 15.0, *){
             let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = .white
             tabBar.alpha = 0.8
-            tabBar.standardAppearance = appearance
+            //tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = appearance
         }
     }
