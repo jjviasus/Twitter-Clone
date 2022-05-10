@@ -12,6 +12,16 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Properties
     
+    var user: User? {
+        didSet {
+            // Remember: Our feed controller is embedded in a navigation controller
+            guard let nav = self.viewControllers?[0] as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            
+            feed.user = user
+        }
+    }
+    
     // Creating a UI element programmatically
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
@@ -34,6 +44,12 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - API
     
+    func fetchUser() {
+        UserService.shared.fetchUser { user in
+            self.user = user
+        }
+    }
+    
     // Checks if the user is logged in
     func authenticateUserAndConfigureUI() {
         if Auth.auth().currentUser == nil {
@@ -50,6 +66,9 @@ class MainTabBarController: UITabBarController {
             configureViewControllers()
             uiTabBarSetting()
             configureUI()
+            
+            // fetch the current user
+            fetchUser()
         }
     }
     
