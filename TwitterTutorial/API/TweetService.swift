@@ -31,12 +31,16 @@ struct TweetService {
         // The event type (.childAdded) specifies what even you want to listen for. The datasnapshot is a snapshot of the new data.
         REF_TWEETS.observe(.childAdded) { snapshot in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
             
             // The key of each snapshot is the uniquely generated tweet ID
             let tweetID = snapshot.key
-            let tweet = Tweet(tweetID: tweetID, dictionary: dictionary)
-            tweets.append(tweet)
-            completion(tweets)
+            
+            UserService.shared.fetchUser(uid: uid) { user in
+                let tweet = Tweet(user: user, tweetID: tweetID, dictionary: dictionary)
+                tweets.append(tweet)
+                completion(tweets)
+            }
         }
     }
 }
